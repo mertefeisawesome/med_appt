@@ -3,8 +3,8 @@ import "./Sign_Up.css";
 
 const Sign_Up = () => {
   return (
-    <div class="form-container">
-      <div class="form-header">
+    <div className="form-container">
+      <div className="form-header">
         <h1>Sign Up</h1>
         <span>
           Already a member? <a href="#">Login</a>
@@ -62,7 +62,7 @@ const Sign_Up = () => {
             required
           />
         </span>
-        <div class="button-container">
+        <div className="button-container">
           <button type="submit" id="submit">
             Sign Up
           </button>

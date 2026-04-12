@@ -3,8 +3,8 @@ import "./Login.css";
 
 const Login = () => {
   return (
-    <div class="form-container">
-      <div class="form-header">
+    <div className="form-container">
+      <div className="form-header">
         <h1>Login</h1>
         <span>
           Not a member? <a href="#">Sign Up Here</a>
@@ -32,7 +32,7 @@ const Login = () => {
             required
           />
         </span>
-        <div class="button-container">
+        <div className="button-container">
           <button type="submit" id="submit">
             Login
           </button>
@@ -41,7 +41,7 @@ const Login = () => {
           </button>
         </div>
       </form>
-      <div class="form-footer">
+      <div className="form-footer">
         <span>
           <a href="#">Forgot Password?</a>
         </span>
