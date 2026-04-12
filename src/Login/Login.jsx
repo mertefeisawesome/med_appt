@@ -1,0 +1,53 @@
+import React from "react";
+import "./Login.css";
+
+const Login = () => {
+  return (
+    <div class="form-container">
+      <div class="form-header">
+        <h1>Login</h1>
+        <span>
+          Not a member? <a href="#">Sign Up Here</a>
+        </span>
+      </div>
+      <form>
+        <span>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </span>
+
+        <span>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </span>
+        <div class="button-container">
+          <button type="submit" id="submit">
+            Login
+          </button>
+          <button type="reset" id="reset">
+            Reset
+          </button>
+        </div>
+      </form>
+      <div class="form-footer">
+        <span>
+          <a href="#">Forgot Password?</a>
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
