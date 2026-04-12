@@ -25,7 +25,6 @@ const Navbar = () => {
         localStorage.removeItem(key);
       }
     }
-    setEmail("");
     window.location.reload();
   };
 
@@ -67,7 +66,10 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <li className="greeting">
-                Hello, {username}! <button onClick={handleLogout} id="logout-button">Logout</button>
+                Hello, {username}!{" "}
+                <button onClick={handleLogout} id="logout-button">
+                  Logout
+                </button>
               </li>
             </>
           ) : (
