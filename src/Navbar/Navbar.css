@@ -1,7 +1,8 @@
 nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    padding: 10px;
 }
 
 .logo {
@@ -21,7 +22,7 @@ nav {
 nav .right {
     display: flex;
     gap: 30px;
-    align-items: center;
+    align-items: baseline;
 }
 
 nav .right ul {
@@ -53,5 +54,23 @@ nav .right ul {
     border-width: 1px;
     border-style: solid;
     border-radius: 20px;
-    padding: 12px 20px;
+    padding: 10px 20px;
+}
+
+.nav-buttons button#logout-button {
+    background-color: #B20558;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+}
+
+.greeting {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    width: auto;
+    white-space: nowrap;
+    
 }
