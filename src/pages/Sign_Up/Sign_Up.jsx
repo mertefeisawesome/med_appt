@@ -2,7 +2,7 @@ import React from "react";
 import "./Sign_Up.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { API_URL } from "../../config";
+import { API_URL } from "@/../config";
 
 const Sign_Up = () => {
   // State variables using useState hook
