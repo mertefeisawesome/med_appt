@@ -72,3 +72,8 @@ form button#reset {
     color: white;
     border: none;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+}

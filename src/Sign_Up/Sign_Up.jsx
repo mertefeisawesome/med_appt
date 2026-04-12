@@ -11,12 +11,13 @@ const Sign_Up = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [showerr, setShowerr] = useState(""); // State to show error messages
+  const [fieldErrors, setFieldErrors] = useState({}); // State for field-specific errors
   const navigate = useNavigate(); // Navigation hook from react-router
 
   // Function to handle form submission
   const register = async (e) => {
     e.preventDefault(); // Prevent default form submission
+    setFieldErrors({}); // Clear previous errors
 
     // API Call to register user
     const response = await fetch(`${API_URL}/api/auth/register`, {
@@ -46,11 +47,18 @@ const Sign_Up = () => {
       return;
     }
 
+    // Handle errors
     const errors = json.errors || json.error;
     if (Array.isArray(errors)) {
-      setShowerr(errors.map((err) => err.msg || err).join(" "));
+      const errorMap = {};
+      errors.forEach((err) => {
+        if (err.param) {
+          errorMap[err.param] = err.msg;
+        }
+      });
+      setFieldErrors(errorMap);
     } else {
-      setShowerr(errors || "Registration failed");
+      setFieldErrors({ general: errors || "Registration failed" });
     }
   };
 
@@ -62,6 +70,9 @@ const Sign_Up = () => {
         <span>
           Already a member? <Link to="/login">Login</Link>
         </span>
+        {fieldErrors.general && (
+          <div className="error-message">{fieldErrors.general}</div>
+        )}
       </div>
       <form onSubmit={register}>
         <span>
@@ -86,9 +97,15 @@ const Sign_Up = () => {
             name="name"
             placeholder="Enter your name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setFieldErrors((prev) => ({ ...prev, name: "" }));
+            }}
             required
           />
+          {fieldErrors.name && (
+            <div className="error-message">{fieldErrors.name}</div>
+          )}
         </span>
 
         <span>
@@ -99,10 +116,15 @@ const Sign_Up = () => {
             name="phone"
             placeholder="Enter your phone number"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              setPhone(e.target.value);
+              setFieldErrors((prev) => ({ ...prev, phone: "" }));
+            }}
             required
           />
-          {showerr && <div className="error-message">{showerr}</div>}
+          {fieldErrors.phone && (
+            <div className="error-message">{fieldErrors.phone}</div>
+          )}
         </span>
 
         <span>
@@ -113,11 +135,16 @@ const Sign_Up = () => {
             name="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setFieldErrors((prev) => ({ ...prev, email: "" }));
+            }}
             className="form-control"
             required
           />
-          {showerr && <div className="error-message">{showerr}</div>}
+          {fieldErrors.email && (
+            <div className="error-message">{fieldErrors.email}</div>
+          )}
         </span>
 
         <span>
@@ -128,11 +155,16 @@ const Sign_Up = () => {
             name="password"
             placeholder="Enter your password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setFieldErrors((prev) => ({ ...prev, password: "" }));
+            }}
             className="form-control"
             required
           />
-          {showerr && <div className="error-message">{showerr}</div>}
+          {fieldErrors.password && (
+            <div className="error-message">{fieldErrors.password}</div>
+          )}
         </span>
         <div className="button-container">
           <button type="submit" id="submit">
