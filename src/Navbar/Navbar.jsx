@@ -7,7 +7,6 @@ import nurseHeadIcon from "@/assets/nurse-head.svg";
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
 
   const handleLogout = () => {
     sessionStorage.removeItem("auth-token");
@@ -67,8 +66,8 @@ const Navbar = () => {
         <ul className="nav-buttons">
           {isLoggedIn ? (
             <>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
+              <li className="greeting">
+                Hello, {username}! <button onClick={handleLogout} id="logout-button">Logout</button>
               </li>
             </>
           ) : (
