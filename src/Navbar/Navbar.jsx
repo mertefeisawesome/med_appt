@@ -1,20 +1,58 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 import nurseHeadIcon from "@/assets/nurse-head.svg";
 
 const Navbar = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("auth-token");
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("phone");
+    // remove email phone
+    localStorage.removeItem("doctorData");
+    setIsLoggedIn(false);
+    // setUsername("");
+
+    // Remove the reviewFormData from local storage
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key.startsWith("reviewFormData_")) {
+        localStorage.removeItem(key);
+      }
+    }
+    setEmail("");
+    window.location.reload();
+  };
+
+  useEffect(() => {
+    const storedemail = sessionStorage.getItem("email");
+
+    if (storedemail) {
+      setIsLoggedIn(true);
+      setUsername(storedemail);
+    }
+  }, []);
+
   return (
     <nav>
       <div className="left">
-        <div className="logo">
-          <span>StayHealthy</span>
-          <img src={nurseHeadIcon} alt="Nurse Head Icon" />
-        </div>
+        <Link to="/">
+          <div className="logo">
+            <span>StayHealthy</span>
+            <img src={nurseHeadIcon} alt="Nurse Head Icon" />
+          </div>
+        </Link>
       </div>
       <div className="right">
         <ul className="nav-links">
           <li>
-            <a href="#">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <a href="#">Appointments</a>
@@ -27,16 +65,26 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="nav-buttons">
-          <li>
-            <button>
-              <a href="/login">Login</a>
-            </button>
-          </li>
-          <li>
-            <button>
-              <a href="/signup">Sign Up</a>
-            </button>
-          </li>
+          {isLoggedIn ? (
+            <>
+              <li>
+                <button onClick={handleLogout}>Logout</button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li>
+                <button>
+                  <Link to="/login">Login</Link>
+                </button>
+              </li>
+              <li>
+                <button>
+                  <Link to="/signup">Sign Up</Link>
+                </button>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>

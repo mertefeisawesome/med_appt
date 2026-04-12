@@ -1,7 +1,7 @@
 import React from "react";
 import "./Sign_Up.css";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
 
 const Sign_Up = () => {
@@ -25,6 +25,7 @@ const Sign_Up = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        role: role,
         name: name,
         email: email,
         password: password,
@@ -35,23 +36,21 @@ const Sign_Up = () => {
     const json = await response.json(); // Parse the response JSON
 
     if (json.authtoken) {
-      // Store user data in session storage
+      console.log("Registration successful:", json.authtoken); // Log the response for debugging
       sessionStorage.setItem("auth-token", json.authtoken);
       sessionStorage.setItem("name", name);
       sessionStorage.setItem("phone", phone);
       sessionStorage.setItem("email", email);
-
-      // Redirect user to home page
       navigate("/");
-      window.location.reload(); // Refresh the page
+      window.location.reload();
+      return;
+    }
+
+    const errors = json.errors || json.error;
+    if (Array.isArray(errors)) {
+      setShowerr(errors.map((err) => err.msg || err).join(" "));
     } else {
-      if (json.errors) {
-        for (const error of json.errors) {
-          setShowerr(error.msg); // Show error messages
-        }
-      } else {
-        setShowerr(json.error);
-      }
+      setShowerr(errors || "Registration failed");
     }
   };
 
@@ -61,10 +60,10 @@ const Sign_Up = () => {
       <div className="form-header">
         <h1>Sign Up</h1>
         <span>
-          Already a member? <a href="#">Login</a>
+          Already a member? <Link to="/login">Login</Link>
         </span>
       </div>
-      <form method="POST" onSubmit={register}>
+      <form onSubmit={register}>
         <span>
           <label htmlFor="role">Role</label>
           <select
