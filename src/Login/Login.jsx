@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
@@ -7,7 +8,7 @@ const Login = () => {
       <div className="form-header">
         <h1>Login</h1>
         <span>
-          Not a member? <a href="#">Sign Up Here</a>
+          Not a member? <Link to="/signup">Sign Up Here</Link>
         </span>
       </div>
       <form>
