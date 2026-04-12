@@ -28,10 +28,14 @@ const Navbar = () => {
         </ul>
         <ul className="nav-buttons">
           <li>
-            <button>Login</button>
+            <button>
+              <a href="/login">Login</a>
+            </button>
           </li>
           <li>
-            <button>Sign Up</button>
+            <button>
+              <a href="/signup">Sign Up</a>
+            </button>
           </li>
         </ul>
       </div>
