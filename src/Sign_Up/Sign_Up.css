@@ -2,14 +2,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     font-family: "Inter", sans-serif;
     font-size: 16px;
     border: #333333 solid 1px;
     border-radius: 16px;
     padding: 20px 40px;
     width: 300px;
-    background-color: #DBDBDB;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .form-container a {
@@ -28,7 +30,7 @@ form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 30px;
+    gap: 15px;
     width: 100%;
 }
 
@@ -50,12 +52,12 @@ form .button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 5px;
 }
 
 form button { 
     border-radius: 20px;
-    padding: 12px 20px;
+    padding: 10px 20px;
     width: 100%;
 }
 
