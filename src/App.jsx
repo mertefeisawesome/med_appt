@@ -3,9 +3,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import Login from "@/pages/Login/Login";
 import Sign_Up from "@/pages/Sign_Up/Sign_Up";
 import InstantConsultation from "@/components/InstantConsultation/InstantConsultation";
-import FindDoctorSearch from "@/components/FindDoctorSearch/FindDoctorSearch";
-import DoctorCard from "@/components/DoctorCard/DoctorCard";
-import AppointmentForm from "@/components/AppointmentForm/AppointmentForm";
+import BookingConsultation from "@/pages/BookingConsultation/BookingConsultation";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -21,9 +19,10 @@ function App() {
             path="/instant-consultation"
             element={<InstantConsultation />}
           />
-          <Route path="/find-doctor" element={<FindDoctorSearch />} />
-          <Route path="/doc-card" element={<DoctorCard />} />
-          <Route path="/appointment-form" element={<AppointmentForm />} />
+          <Route
+            path="/booking-consultation"
+            element={<BookingConsultation />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

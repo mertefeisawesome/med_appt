@@ -21,7 +21,7 @@ const FindDoctorSearch = () => {
   const handleDoctorSelect = (speciality) => {
     setSearchDoctor(speciality);
     setDoctorResultHidden(true);
-    navigate(`/instant-consultation?speciality=${speciality}`);
+    navigate(`/booking-consultation?speciality=${speciality}`);
     window.location.reload();
   };
   return (
@@ -33,7 +33,7 @@ const FindDoctorSearch = () => {
       <div className="find-doctor-body">
         <div className="search-container">
           <input
-            type="text"
+            type="search"
             placeholder="Search doctors, clinics, hospitals, etc."
             onFocus={() => setDoctorResultHidden(false)}
             onBlur={() => setDoctorResultHidden(true)}

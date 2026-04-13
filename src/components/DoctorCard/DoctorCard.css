@@ -43,3 +43,7 @@ width: 100%;
     color: white;
     border: none;
 }
+
+.cancel-appointment {
+    background-color: #B20558;
+}

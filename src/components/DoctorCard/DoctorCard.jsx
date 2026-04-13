@@ -5,15 +5,8 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { v4 as uuidv4 } from "uuid";
 
-const doc = {
-  name: "Dr. Jiao Yang",
-  ratings: "⭐⭐⭐⭐⭐",
-  experience: 9,
-  speciality: "Dentist",
-};
 
-const DoctorCard = (props) => {
-  const doctor = { ...doc, ...props };
+const DoctorCard = ({doctor}) => {
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
 

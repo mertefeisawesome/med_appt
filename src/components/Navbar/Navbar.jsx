@@ -61,9 +61,13 @@ const Navbar = () => {
           <li>
             <a href="#">Reviews</a>
           </li>
-          <li>
-            <Link to="/instant-consultation">Instant Consultation</Link>
-          </li>
+          {isLoggedIn ? (
+            <li>
+              <Link to="/booking-consultation">Booking Consultation</Link>
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
         <ul className="nav-buttons">
           {isLoggedIn ? (
