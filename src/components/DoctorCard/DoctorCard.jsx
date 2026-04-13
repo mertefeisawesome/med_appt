@@ -78,7 +78,7 @@ const DoctorCard = (props) => {
         open={showModal}
         onClose={() => setShowModal(false)}
       >
-        {(close) => (
+        {() => (
           <div
             className="doctorbg"
             style={{ height: "100vh", overflow: "scroll" }}
