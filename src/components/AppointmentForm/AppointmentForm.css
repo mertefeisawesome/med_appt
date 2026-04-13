@@ -1,0 +1,15 @@
+.appointment-form {
+    background-color: transparent;
+    border: 1px solid #5347DD;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.appointment-form button {
+    background-color: #5347DD;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
