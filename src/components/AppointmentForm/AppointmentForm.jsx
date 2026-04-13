@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./AppointmentForm.css";
 
-const AppointmentForm = (onSubmit) => {
+const AppointmentForm = ({ onSubmit }) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
 
