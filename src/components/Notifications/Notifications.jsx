@@ -10,25 +10,26 @@ const Notifications = ({ children }) => {
   // State variables to manage user authentication, username, doctor data, and appointment data
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [appointmentData, setAppointmentData] = useState(null);
+  const [appointmentData] = useState(() => {
+    const storedAppointments = localStorage.getItem("appointments");
+    let parsedAppointments = [];
 
-  // useEffect hook to perform side effects in the component
+    try {
+      const data = storedAppointments ? JSON.parse(storedAppointments) : [];
+      parsedAppointments = Array.isArray(data) ? data : [data];
+    } catch (error) {
+      parsedAppointments = [];
+    }
+
+    return parsedAppointments;
+  });
+
   useEffect(() => {
-    // Retrieve stored username, doctor data, and appointment data from sessionStorage and localStorage
     const storedUsername = sessionStorage.getItem("email");
-    const storedAppointmentData = JSON.parse(
-      localStorage.getItem("appointments"),
-    );
 
-    // Set isLoggedIn state to true and update username if storedUsername exists
     if (storedUsername) {
       setIsLoggedIn(true);
       setUsername(storedUsername);
-    }
-
-    // Set appointmentData state if storedAppointmentData exists
-    if (storedAppointmentData) {
-      setAppointmentData(storedAppointmentData);
     }
   }, []); // Empty dependency array ensures useEffect runs only once after initial render
 

@@ -1,0 +1,29 @@
+.reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.reviews table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+}
+
+.reviews th,
+.reviews td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.reviews table button {
+  background-color: #B20558;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: auto;
+}

@@ -7,7 +7,14 @@ import { v4 as uuidv4 } from "uuid";
 
 const DoctorCard = ({ doctor }) => {
   const [showModal, setShowModal] = useState(false);
-  const [appointments, setAppointments] = useState([]);
+  const [appointments, setAppointments] = useState(() => {
+    const data = localStorage.getItem("appointments");
+    return data ? JSON.parse(data) : [];
+  });
+
+  const doctorAppointments = appointments.filter(
+    (appointment) => appointment.doctor === doctor.name,
+  );
 
   const handleCancel = (appointmentId) => {
     const updatedAppointments = appointments.filter(
@@ -51,9 +58,9 @@ const DoctorCard = ({ doctor }) => {
           style={{ backgroundColor: "#FFFFFF" }}
           trigger={
             <button
-              className={`book-appointment-button ${appointments.length > 0 ? "cancel-appointment" : ""}`}
+              className={`book-appointment-button ${doctorAppointments.length > 0 ? "cancel-appointment" : ""}`}
             >
-              {appointments.length > 0 ? (
+              {doctorAppointments.length > 0 ? (
                 <>Cancel Appointment</>
               ) : (
                 <>
@@ -99,10 +106,10 @@ const DoctorCard = ({ doctor }) => {
                 </div>
               </div>
 
-              {appointments.length > 0 ? (
+              {doctorAppointments.length > 0 ? (
                 <>
                   <h3 style={{ textAlign: "center" }}>Appointment Booked!</h3>
-                  {appointments.map((appointment) => (
+                  {doctorAppointments.map((appointment) => (
                     <div
                       className="bookedInfo"
                       style={{ textAlign: "center" }}
