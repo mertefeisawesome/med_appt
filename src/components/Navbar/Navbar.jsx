@@ -1,12 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import nurseHeadIcon from "@/assets/nurse-head.svg";
+import ProfileCard from "@/components/ProfileCard/ProfileCard";
 
 const Navbar = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    () => !!sessionStorage.getItem("email"),
+  );
+  const [username] = useState(() => sessionStorage.getItem("email") || "");
+  const [showProfileCard, setShowProfileCard] = useState(false);
+  const profileButtonRef = useRef(null);
+  const profileWrapperRef = useRef(null);
 
   const handleLogout = () => {
     sessionStorage.removeItem("auth-token");
@@ -16,26 +22,40 @@ const Navbar = () => {
     localStorage.removeItem("doctorData");
     localStorage.removeItem("appointments");
     setIsLoggedIn(false);
-    // setUsername("");
+    setShowProfileCard(false);
 
     // Remove the reviewFormData from local storage
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key.startsWith("reviewFormData_")) {
+      if (key && key.startsWith("reviewFormData_")) {
         localStorage.removeItem(key);
       }
     }
     window.location.reload();
   };
 
-  useEffect(() => {
-    const storedemail = sessionStorage.getItem("email");
+  const toggleProfileCard = () => {
+    setShowProfileCard((current) => !current);
+  };
 
-    if (storedemail) {
-      setIsLoggedIn(true);
-      setUsername(storedemail);
-    }
-  }, []);
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (
+        showProfileCard &&
+        profileWrapperRef.current &&
+        !profileWrapperRef.current.contains(event.target) &&
+        profileButtonRef.current &&
+        !profileButtonRef.current.contains(event.target)
+      ) {
+        setShowProfileCard(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [showProfileCard]);
 
   return (
     <nav>
@@ -73,10 +93,27 @@ const Navbar = () => {
           {isLoggedIn ? (
             <>
               <li className="greeting">
-                Hello, {username}!{" "}
+                <span className="greeting-text">
+                  Hello,{" "}
+                  <button
+                    ref={profileButtonRef}
+                    onClick={toggleProfileCard}
+                    id="profile-button"
+                  >
+                    {username}
+                  </button>
+                  !
+                </span>
                 <button onClick={handleLogout} id="logout-button">
                   Logout
                 </button>
+                {showProfileCard && (
+                  <div className="profile-card-wrapper" ref={profileWrapperRef}>
+                    <ProfileCard
+                      onClose={() => setShowProfileCard(false)}
+                    />
+                  </div>
+                )}
               </li>
             </>
           ) : (

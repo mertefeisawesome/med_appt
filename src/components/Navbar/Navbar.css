@@ -65,6 +65,7 @@ nav .right ul {
 }
 
 .greeting {
+    position: relative;
     display: flex;
     align-items: baseline;
     gap: 10px;
@@ -72,5 +73,81 @@ nav .right ul {
     font-size: 16px;
     width: auto;
     white-space: nowrap;
-    
+}
+
+.greeting-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#profile-button {
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-card-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: translateY(12px);
+    z-index: 20;
+    width: 280px;
+}
+
+.profile-card-blob {
+    position: relative;
+    padding: 20px;
+    background: rgba(83, 71, 221, 0.95);
+    color: white;
+    border-radius: 32px;
+    box-shadow: 0 18px 40px rgba(83, 71, 221, 0.22);
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+}
+
+.profile-card-blob::before {
+    content: "";
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    top: -60px;
+    right: -60px;
+}
+
+.profile-card-blob::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    bottom: -40px;
+    left: -40px;
+}
+
+.profile-card-blob h3,
+.profile-card-blob p {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-card-blob p {
+    margin: 8px 0;
+    font-size: 0.95rem;
+}
+
+.profile-card-blob button {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1.2rem;
+    cursor: pointer;
 }
