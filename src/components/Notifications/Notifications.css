@@ -1,0 +1,11 @@
+.appointment-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #5347DD;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 16px;
+    width: auto;
+    font-family: "Inter", sans-serif;
+    color: white;
+}
