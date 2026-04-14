@@ -5,14 +5,9 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { v4 as uuidv4 } from "uuid";
 
-
-const DoctorCard = ({doctor}) => {
+const DoctorCard = ({ doctor }) => {
   const [showModal, setShowModal] = useState(false);
   const [appointments, setAppointments] = useState([]);
-
-  const handleBooking = () => {
-    setShowModal(true);
-  };
 
   const handleCancel = (appointmentId) => {
     const updatedAppointments = appointments.filter(
@@ -24,9 +19,12 @@ const DoctorCard = ({doctor}) => {
   const handleFormSubmit = (appointmentData) => {
     const newAppointment = {
       id: uuidv4(),
+      doctor: doctor.name,
+      speciality: doctor.speciality,
       ...appointmentData,
     };
     const updatedAppointments = [...appointments, newAppointment];
+    localStorage.setItem("appointments", JSON.stringify(updatedAppointments));
     setAppointments(updatedAppointments);
     setShowModal(false);
   };
@@ -105,9 +103,15 @@ const DoctorCard = ({doctor}) => {
                 <>
                   <h3 style={{ textAlign: "center" }}>Appointment Booked!</h3>
                   {appointments.map((appointment) => (
-                    <div className="bookedInfo" key={appointment.id}>
+                    <div
+                      className="bookedInfo"
+                      style={{ textAlign: "center" }}
+                      key={appointment.id}
+                    >
                       <p>Name: {appointment.name}</p>
-                      <p>Phone Number: {appointment.phoneNumber}</p>
+                      <p>Phone Number: {appointment.phone}</p>
+                      <p>Date: {appointment.date}</p>
+                      <p>Time: {appointment.time}</p>
                       <button onClick={() => handleCancel(appointment.id)}>
                         Cancel Appointment
                       </button>
